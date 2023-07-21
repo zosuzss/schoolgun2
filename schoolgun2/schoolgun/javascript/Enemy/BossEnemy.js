@@ -48,7 +48,7 @@ var Enemy  = Class.create(Sprite,{
     //タイプ事に入れ替え
     setStatusFromEnemyType: function () {
         if (this.enemy_type == 1) {
-            this.image = game.assets["image/enemy/Bigenemy.png"];
+            this.image = game.assets["image/enemy/BigenemyO.png"];
             this.hp = 1;
         }
     },
