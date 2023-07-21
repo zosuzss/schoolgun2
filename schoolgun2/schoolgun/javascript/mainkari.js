@@ -3,7 +3,9 @@ enchant();
 //グローバル関数
 var game;
 var player;
+var BossEnemy;
 var enemy;
+var enemy2;
 var scene;
 var resultscene;
 var bg;
@@ -54,7 +56,7 @@ window.onload = function(){
             score = Scene(score2)
             scene.addChild(score);
             scene.addChild(hpvar);
-           
+            var boss = 0
             //1フレームごとに動かす
             scene.onenterframe = function(){
                 scene.insertBefore(board, null);
@@ -63,8 +65,14 @@ window.onload = function(){
                 if(gameover1==0){
                 if (game.frame % 60 == 0) {
                 
-                    enemy = new Enemy({x:380,y:50,speed:3,enemy_type:1,move_type:Math.floor(Math.random() * 3)});
+                    enemy = new Enemy({x:380,y:50,speed:3,enemy_type:1,move_type:Math.floor(Math.random() * 4)});
                     scene.addChild(enemy);
+                    if(score2 == 300&&boss==0){
+                    enemy2 = new BossEnemy2({x:380,y:50,speed:3,enemy_type:1,move_type:0});
+                    scene.addChild(enemy2);
+                    boss+=10
+                    }
+                    
                 }
             }
                 checkIntersect();
@@ -193,6 +201,14 @@ function checkIntersect(){
         //},5000)
     })
     Enemy.intersect(Weapon).forEach(function (pair) {
+        //pair[0]がenemy
+        //pair[1]がweapon
+        pair[0].damage(pair[1].power);
+        scene.removeChild(pair[1]);
+        scorecolmn = 1;
+    });
+
+    BossEnemy2.intersect(Weapon).forEach(function (pair) {
         //pair[0]がenemy
         //pair[1]がweapon
         pair[0].damage(pair[1].power);
