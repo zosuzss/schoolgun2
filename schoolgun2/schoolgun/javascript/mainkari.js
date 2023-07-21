@@ -65,7 +65,7 @@ window.onload = function(){
                 if(gameover1==0){
                 if (game.frame % 60 == 0) {
                 
-                    enemy = new Enemy({x:380,y:50,speed:3,enemy_type:1,move_type:Math.floor(Math.random() * 3)});
+                    enemy = new Enemy({x:380,y:50,speed:3,enemy_type:1,move_type:Math.floor(Math.random() * 4)});
                     scene.addChild(enemy);
                     if(score2 == 300&&boss==0){
                     enemy2 = new BossEnemy2({x:380,y:50,speed:3,enemy_type:1,move_type:0});

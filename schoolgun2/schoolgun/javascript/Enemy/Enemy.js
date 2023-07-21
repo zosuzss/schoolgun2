@@ -73,6 +73,11 @@ var Enemy  = Class.create(Sprite,{
             this.x = 400+160;
             this.y = -10;
             this.hp = 30;
+        }else if(this.move_type==3){
+            this.x = 400;
+            this.y = -10;
+            this.hp = 3;
+            this.rotate_x = 1;
         }
     },
     //初期化用
@@ -98,7 +103,22 @@ var Enemy  = Class.create(Sprite,{
             this.x += Math.cos(ang * (Math.PI / 180)) * this.speed;
             this.y += Math.sin(ang * (Math.PI / 180)) * this.speed;
             this.tl.rotateTo(ang-90, 0);
-        };
+        }else  if (this.move_type == 3) {
+            this.x += Math.cos(this.angle * (Math.PI / 180)) * this.speed;
+            this.y += Math.sin(this.angle * (Math.PI / 180)) * this.speed;
+
+            if (game.frame - this.initial_frame >= (480 / this.speed) && game.frame - this.initial_frame < (600 / this.speed)) {
+                this.angle += 1.5 * this.speed * this.rotate_x;
+                if (game.frame - this.initial_frame + 1 >= (600 / this.speed)) {
+                    this.angle = 90 + 90 * this.rotate_x;
+                }
+            }
+        }
+
+            //時間経過で消滅
+            if (game.frame - this.initial_frame >= (1500 / this.speed)) {
+                this.preDestroy();
+            };
     },
     //エネミーのダメージ計算
     damage: function(weapon_damage){
