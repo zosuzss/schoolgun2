@@ -1,0 +1,75 @@
+<html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>サンプル</title>
+</head>
+
+<body>
+    <dd id="score1">晴れ</dd>
+    <dd id="score2">晴れ</dd>
+    <dd id="score3">晴れ</dd>
+    <script>
+        function reset() {
+            localStorage.setItem('1s', 0);
+            localStorage.setItem('1n', noname);
+            localStorage.setItem('2s', 0);
+            localStorage.setItem('2n', noname);
+            localStorage.setItem('3s', 0);
+            localStorage.setItem('3n', noname);
+        }
+        function setjuni(name, score) {//ランクを挿入
+            var i1 = Number(localStorage.getItem('1s'));
+            var i2 = Number(localStorage.getItem('2s'));
+            var i3 = Number(localStorage.getItem('3s'));
+            if (i1 <= score || localStorage.getItem('1s') == 'null') {
+                localStorage.setItem('3s', localStorage.getItem('2s'))
+                localStorage.setItem('3n', localStorage.getItem('2n'))
+                localStorage.setItem('2s', localStorage.getItem('1s'))
+                localStorage.setItem('2n', localStorage.getItem('1n'))
+                localStorage.setItem('1s', score);
+                localStorage.setItem('1n', name);
+            } else if (i2 <= score || localStorage.getItem('2s') == 'null') {
+                localStorage.setItem('3s', localStorage.getItem('2s'))
+                localStorage.setItem('3n', localStorage.getItem('2n'))
+                localStorage.setItem('2s', score);
+                localStorage.setItem('2n', name);
+            } else if (i3 <= score || localStorage.getItem('3s') == 'null') {
+                localStorage.setItem('3s', score);
+                localStorage.setItem('3n', name);
+            } else {
+                alert('ランク外');
+            }
+        }
+        //document.write(localStorage.getItem('kan'));
+        var name = localStorage.getItem('kan');
+        var score = Number(localStorage.getItem('kas'));
+        setjuni(name, score);
+
+        var sn1 = localStorage.getItem('1n');
+        var ss1 = localStorage.getItem('1s');
+        var element1 = document.getElementById("score1");
+        element1.innerHTML = '<font size="7">' + sn1 + 'さん' + ss1 + '点</font>';
+
+        var sn2 = localStorage.getItem('2n');
+        var ss2 = localStorage.getItem('2s');
+        var element2 = document.getElementById("score2");
+        element2.innerHTML = '<font size="7">' + sn2 + 'さん' + ss2 + '点</font>';
+
+        var sn3 = localStorage.getItem('3n');
+        var ss3 = localStorage.getItem('3s');
+        var element3 = document.getElementById("score3");
+        element3.innerHTML = '<font size="7">' + sn3 + 'さん' + ss3 + '点</font>';
+        //document.writeln('１位' + localStorage.getItem('1n') + 'さん' + localStorage.getItem('1s') + 'ポイント');
+        //document.writeln('２位' + localStorage.getItem('2n') + 'さん' + localStorage.getItem('2s') + 'ポイント');
+        //document.writeln('３位' + localStorage.getItem('3n') + 'さん' + localStorage.getItem('3s') + 'ポイント');
+        //reset();
+
+
+    </script>
+    <!--A href="next.html">次へ</A><-->
+
+</body>
+
+</html>

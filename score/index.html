@@ -1,0 +1,58 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>スコア記録</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+
+<body>
+
+    <div class="example">
+        <p>
+            <font size="7">あなたのスコアは</font>
+            <font size="7">
+                <dd id="score">晴れ</dd>
+            </font>
+            <font size="7">点です！</font>
+            <br>
+            <font size="7">名前を入力</font>
+        </p>
+    </div>
+    <script src="index].js"></script>
+    <p>
+    <div class="example">
+        <label><input type="text" style="width: 200px; height: 30px;" id="nameText"></label>
+        <input type="button" style="width: 60px; height: 30px;" value="確認" id="checkButton">
+    </div>
+    </p>
+    <style>
+        .example {
+            text-align: center;
+        }
+    </style>
+
+    <p id="msg"></p>
+
+    <script>
+        function butotnClick() {
+
+            localStorage.setItem('kan', nameText.value)
+            msg.innerText = 'お名前は' + localStorage.getItem('kan') + 'さんですね';
+            msg.style.textAlign = "center";
+            msg.style.fontSize = "60px";
+        }
+
+        let nameText = document.getElementById('nameText');
+        nameText.value = '';
+        let msg = document.getElementById('msg');
+
+        let checkButton = document.getElementById('checkButton');
+        checkButton.addEventListener('click', butotnClick);
+    </script>
+    <div class="example"><A href="next.html">
+            <font size="7">順位表示</font>
+        </A></div>
+</body>
+
+</html>
