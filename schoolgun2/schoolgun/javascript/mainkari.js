@@ -22,6 +22,7 @@ var currentHP;
 var operation;
 var result1;
 var rr2;
+var stage
 
 window.onload = function(){
     game = new Game(1000,500);
@@ -68,6 +69,10 @@ window.onload = function(){
                 checkIntersect();
             }
         });
+
+        //ステージ2
+        stage2 = new Scene();
+        
         //リザルト画面
         resultscene = new Scene();
         result1 = new Resultbg();
@@ -79,9 +84,9 @@ window.onload = function(){
                 gameover1 = 0;
                 game.removeScene(resultscene);
                 game.pushScene(scene);
-            }
-        })
-    }
+            };
+        });
+    };
     game.start();
 };
 //画像ロード
@@ -202,8 +207,6 @@ function revivePlayer() {
     scene.addChild(hpvar);
     */game.removeScene(scene);
     game.pushScene(resultscene);
-    
-   
 }
 
 //ui設定
