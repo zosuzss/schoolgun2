@@ -5,6 +5,7 @@ var game;
 var player;
 var BossEnemy;
 var enemy;
+var enemy2;
 var scene;
 var resultscene;
 var bg;
@@ -37,7 +38,7 @@ window.onload = function(){
         scene = new Scene();
         game.pushScene(scene);
         scene.backgroundColor = 'black';
-        bg = new Backg();
+        bg = new Backg("image/others/space2.jpg");
         player = new Player();
         start = new Start();
         gameover = new Gameover();
@@ -55,24 +56,38 @@ window.onload = function(){
             score = Scene(score2)
             scene.addChild(score);
             scene.addChild(hpvar);
-           
+            var boss = 0
             //1フレームごとに動かす
             scene.onenterframe = function(){
                 scene.insertBefore(board, null);
                 label_score._score = score2;
+                localStorage.setItem('kas',score2);//スコアを記録
                 if(gameover1==0){
                 if (game.frame % 60 == 0) {
                 
                     enemy = new Enemy({x:380,y:50,speed:3,enemy_type:1,move_type:Math.floor(Math.random() * 3)});
                     scene.addChild(enemy);
+                    if(score2 == 300&&boss==0){
+                    enemy2 = new BossEnemy2({x:380,y:50,speed:3,enemy_type:1,move_type:0});
+                    scene.addChild(enemy2);
+                    boss+=10
+                    }
+                    
                 }
             }
                 checkIntersect();
+                /*player.addEventListener(Event.TOUCH_START,function(){
+                    game.pushScene(stage2);
+                    stage2.addChild(player);
+                })*/
             }
         });
 
         //ステージ2
         stage2 = new Scene();
+        var bg2 = new Backg("image/others/brackhole.jpg");
+        stage2.addChild(bg2);
+        stage2.addChild(player);
         
         //リザルト画面
         resultscene = new Scene();
@@ -104,6 +119,7 @@ function doPreload(){
         "image/others/BB.jpg",
         "image/others/settei1.png",
         "image/others/space2.jpg",
+        "image/others/brackhole.jpg",
         "image/others/titlelogo.png",
         "image/others/titlelogo1.png",
         "image/others/GameOver1.png",
@@ -124,10 +140,10 @@ function Score(text){
 }
 //背景設定
 var Backg = Class.create(Sprite,{
-    initialize: function(){
+    initialize: function(a){
         Sprite.call(this,320,500);
         this.x = 400;
-        this.image = game.assets["image/others/space2.jpg"];
+        this.image = game.assets[a];
     },
 
     
@@ -185,6 +201,14 @@ function checkIntersect(){
         //},5000)
     })
     Enemy.intersect(Weapon).forEach(function (pair) {
+        //pair[0]がenemy
+        //pair[1]がweapon
+        pair[0].damage(pair[1].power);
+        scene.removeChild(pair[1]);
+        scorecolmn = 1;
+    });
+
+    BossEnemy2.intersect(Weapon).forEach(function (pair) {
         //pair[0]がenemy
         //pair[1]がweapon
         pair[0].damage(pair[1].power);
