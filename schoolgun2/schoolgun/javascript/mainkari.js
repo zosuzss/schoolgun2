@@ -36,7 +36,7 @@ window.onload = function(){
         scene = new Scene();
         game.pushScene(scene);
         scene.backgroundColor = 'black';
-        bg = new Backg();
+        bg = new Backg("image/others/space2.jpg");
         player = new Player();
         start = new Start();
         gameover = new Gameover();
@@ -67,11 +67,18 @@ window.onload = function(){
                 }
             }
                 checkIntersect();
+                /*player.addEventListener(Event.TOUCH_START,function(){
+                    game.pushScene(stage2);
+                    stage2.addChild(player);
+                })*/
             }
         });
 
         //ステージ2
         stage2 = new Scene();
+        var bg2 = new Backg("image/others/brackhole.jpg");
+        stage2.addChild(bg2);
+        stage2.addChild(player);
         
         //リザルト画面
         resultscene = new Scene();
@@ -93,7 +100,7 @@ window.onload = function(){
 function doPreload(){
     game.preload(
         "image/score_bg.jpg",
-        "image/enemy/BigEnemy.png",
+        "image/enemy/BigEnemyO.png",
         "image/enemy/BigEnemy2.png",
         "image/enemy/BigEnemy3.png",
         "image/enemy/smallenemy.png",
@@ -103,6 +110,7 @@ function doPreload(){
         "image/others/BB.jpg",
         "image/others/settei1.png",
         "image/others/space2.jpg",
+        "image/others/brackhole.jpg",
         "image/others/titlelogo.png",
         "image/others/titlelogo1.png",
         "image/others/GameOver1.png",
@@ -123,10 +131,10 @@ function Score(text){
 }
 //背景設定
 var Backg = Class.create(Sprite,{
-    initialize: function(){
+    initialize: function(a){
         Sprite.call(this,320,500);
         this.x = 400;
-        this.image = game.assets["image/others/space2.jpg"];
+        this.image = game.assets[a];
     },
 
     
