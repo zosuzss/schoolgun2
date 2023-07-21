@@ -57,7 +57,7 @@ var BossEnemy2  = Class.create(Sprite,{
     //タイプごとに配置場所変更
     setPositionFromMoveTypeIsLeft: function(){
         if(this.move_type==0){
-            this.x = 400;
+            this.x = 397;
             this.y = -10;
             this.hp =300;
         }
@@ -74,14 +74,14 @@ var BossEnemy2  = Class.create(Sprite,{
         if(this.movetype==0){
             this.x += Math.cos(this.angle * (Math.PI / 180)) * 3;
             this.y += Math.sin(this.angle * (Math.PI / 180)) * 3;
-            this.angle -=1.2;
+            this.angle -=1.31;
             if(this.y<-11){
                 this.movetype = 1;
             }
         }else if(this.movetype==1){
             this.x -= Math.cos(this.angle * (Math.PI / 180)) * this.speed;
             this.y -= Math.sin(this.angle * (Math.PI / 180)) * this.speed;
-            this.angle +=1.2;
+            this.angle +=1.31;
             if(this.y<-11){
                 this.movetype = 0;
             }
