@@ -7,7 +7,7 @@
  * @param   param["move_type"]
  */
 
-var Enemy  = Class.create(Sprite,{
+var BossEnemy  = Class.create(Sprite,{
     initialize: function(param){
         //paramをメンバ変数へ変換(座標以外(Sprite宣言前に座標設定ができないため))
         this.createEntity(param);

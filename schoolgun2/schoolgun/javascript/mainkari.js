@@ -88,7 +88,7 @@ window.onload = function(){
 function doPreload(){
     game.preload(
         "image/score_bg.jpg",
-        "image/enemy/BigEnemy.png",
+        "image/enemy/BigEnemyO.png",
         "image/enemy/BigEnemy2.png",
         "image/enemy/BigEnemy3.png",
         "image/enemy/smallenemy.png",
