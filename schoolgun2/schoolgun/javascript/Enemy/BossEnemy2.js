@@ -48,7 +48,7 @@ var BossEnemy2  = Class.create(Sprite,{
     },
     setSpriteScaleFromEnemyType: function (param) {
         if (this.enemy_type == 1) {
-            Sprite.call(this, 32, 32);
+            Sprite.call(this, 64, 64);
             this.attack_cooltime = 0;
         }
         this.x = param["x"];
