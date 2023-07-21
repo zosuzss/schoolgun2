@@ -27,9 +27,9 @@ var BossEnemy  = Class.create(Sprite,{
         if(this.move_type==2){
             this.hp = 30;
         }else{
-        this.hp = 9;
+        this.hp = 30;
         }
-        this.test = calculateAngle(this.x + this.width / 2, this.y + this.height / 2, player.x + (player.width / 2), player.y + (player.height / 2));
+        this.test = calculateAngle(this.x + this.width / 2, this.y + this.height / 2, player.x + (player.qqwidth / 2), player.y + (player.height / 2));
     },
     onenterframe: function(){
         if (game.frame % 10 == 0) {
@@ -49,7 +49,7 @@ var BossEnemy  = Class.create(Sprite,{
     setStatusFromEnemyType: function () {
         if (this.enemy_type == 1) {
             this.image = game.assets["image/enemy/BigenemyO.png"];
-            this.hp = 1;
+            this.hp = 30;
         }
     },
     setSpriteScaleFromEnemyType: function (param) {
@@ -63,12 +63,12 @@ var BossEnemy  = Class.create(Sprite,{
     //タイプごとに配置場所変更
     setPositionFromMoveTypeIsLeft: function(){
         if(this.move_type==0){
-            this.x = 400;
+            this.x = 500;
             this.y = -10;
-            this.hp =9;
+            this.hp = 30;
         }else if(this.move_type==1){
             this.x = 690;
-            this.hp = 9;
+            this.hp = 30;
         }else if(this.move_type==2){
             this.x = 400+160;
             this.y = -10;

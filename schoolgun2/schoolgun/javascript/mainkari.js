@@ -3,6 +3,7 @@ enchant();
 //グローバル関数
 var game;
 var player;
+var BossEnemy;
 var enemy;
 var scene;
 var resultscene;
