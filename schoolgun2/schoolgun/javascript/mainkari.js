@@ -59,7 +59,7 @@ window.onload = function(){
             scene.onenterframe = function(){
                 scene.insertBefore(board, null);
                 label_score._score = score2;
-                localStorage.setItem('kas',score2);
+                localStorage.setItem('kas',score2);//スコアを記録
                 if(gameover1==0){
                 if (game.frame % 60 == 0) {
                 
