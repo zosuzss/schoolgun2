@@ -25,6 +25,8 @@ var operation;
 var result1;
 var rr2;
 var stage
+var test
+
 
 window.onload = function(){
     game = new Game(1000,500);
