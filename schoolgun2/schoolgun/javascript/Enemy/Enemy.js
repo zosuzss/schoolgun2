@@ -41,7 +41,7 @@ var Enemy  = Class.create(Sprite,{
         }
         this.move();
         this.attack();
-        if(this.x<=390||this.x>=691||this.y>=460||this.y<=-20){
+        if(this.x<=390||this.x>=691||this.y>=990||this.y<=-20){
             scene.removeChild(this);
         }
     },
@@ -138,6 +138,8 @@ var Enemy  = Class.create(Sprite,{
                 this.attackCircle(16);
             }else if(this.move_type==2){
                 this.attack1(to_player,0);
+            }else if(this.move_type==3){
+                this.attackswirl(16);
             }
             this.attack_cooltime = 40;
         }
@@ -176,5 +178,23 @@ var Enemy  = Class.create(Sprite,{
             var bullet = new Enemybullet(this.x + (this.width / 2), this.y + (this.height / 2), (360 / num_bullet) * i + this.angle, 10, "straight", 0,5);
             scene.addChild(bullet);
         }
+    },
+    /**
+     * 円形の弾
+     * @param {any} to_angle 
+     * @param {any} space   
+     * @param {any} is_to_player    
+     */
+    attackswirl: function(num_bullet){
+            var i = 0
+            var s = setInterval(function(){
+            var bullet = new Enemybullet(this.x + (this.width / 2), this.y + (this.height / 2), (360 / num_bullet) * i + this.angle, 10, "straight", 0,5);
+            scene.addChild(bullet);
+            i+1;
+            if(i >=num_bullet){
+                clearInterval(s);
+            }
+        },100);
+        
     },
 });

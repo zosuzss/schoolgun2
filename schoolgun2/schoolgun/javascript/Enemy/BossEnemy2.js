@@ -113,6 +113,9 @@ var BossEnemy2  = Class.create(Sprite,{
                 this.attackfome = 2;
             }else if(this.attackfome==2){
                 this.attack1(to_player,0);
+                this.attackfome = 3;
+            }else if(this.attackfome==3){
+                this.attackCircle(16);
                 this.attackfome = 0;
             }
             this.attack_cooltime = 40;
