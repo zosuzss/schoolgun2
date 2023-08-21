@@ -1,3 +1,4 @@
+var explanation;
 var Player = Class.create(Sprite,{
     initialize: function(){
         Sprite.call(this,32,32);
@@ -62,6 +63,8 @@ var Player = Class.create(Sprite,{
     dame: function(bullet_dame){
         this.hp -= bullet_dame;
         if(this.hp<=0){
+            explanation = new Explosion(this.x,this.y)
+            scene.addChild(explanation);
             scene.removeChild(this);
             gameover1 = 1;
             scene.addChild(gameover);

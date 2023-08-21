@@ -24,8 +24,9 @@ var currentHP;
 var operation;
 var result1;
 var rr2;
-var stage
-var test
+var stage;
+var test;
+var explosion;
 
 
 window.onload = function(){
@@ -67,7 +68,7 @@ window.onload = function(){
                 if(gameover1==0){
                 if (game.frame % 60 == 0) {
                 
-                    enemy = new Enemy({x:380,y:50,speed:3,enemy_type:1,move_type:Math.floor(Math.random() * 4)});
+                    enemy = new Enemy({x:380,y:50,speed:3,enemy_type:1,move_type:Math.floor(Math.random() * 3)});
                     scene.addChild(enemy);
                     if(score2 >= 300&&boss==0){
                     enemy2 = new BossEnemy2({x:380,y:50,speed:3,enemy_type:1,move_type:0});
@@ -129,6 +130,7 @@ function doPreload(){
         "image/player/kadai.png",
         "image/player/kitai1.png",
         "image/player/bullet.png",
+        "image/player/ex.png",
     );
 };
 //スコア（用済み）
@@ -377,6 +379,29 @@ function Resultset2(){
     label2.x = 490;
     label2.y = 100;
     resultscene.addChild(label);
-    resultscene.addChild(label2);ｓｚ
+    resultscene.addChild(label2);
 }
 
+/*var Explosion = Class.create(Sprite,{
+    initialize: function(X,Y){
+        Sprite.call(this,32,32);
+        this.image = game.assets["image/player/爆発.png"]
+        this.x = X;
+        this.y = Y;
+    },
+    onenterframe: function(){
+        if (game.frame % 10 == 0) {
+            if (this.frame == 4) {
+                this.frame = 0;
+            } else if(this.frame==3) {
+                this.frame = 1;
+            }else if(this.frame==2){
+                this.frame=2;
+            }else if(this.frame==1){
+                this.frame=3
+            }else{
+                this.frame=4
+            }
+        }
+    }
+})*/

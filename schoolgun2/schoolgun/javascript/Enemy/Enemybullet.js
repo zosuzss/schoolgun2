@@ -27,7 +27,7 @@ var Enemybullet = Class.create(Sprite, {
             this.y += Math.sin(this.angle * (Math.PI / 180)) * this.speed;
             this.frame = (this.frame + 1) % 3;
         }
-        if (this.x <= 400 || this.x >= 700 || this.y <= -30 || this.y >= 990) {
+        if (this.x <= 400 || this.x >= 700 || this.y <= -30 || this.y >= 500) {
             scene.removeChild(this);
         }
     }

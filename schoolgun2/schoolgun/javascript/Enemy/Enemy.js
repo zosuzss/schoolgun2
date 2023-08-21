@@ -41,7 +41,7 @@ var Enemy  = Class.create(Sprite,{
         }
         this.move();
         this.attack();
-        if(this.x<=390||this.x>=691||this.y>=990||this.y<=-20){
+        if(this.x<=390||this.x>=691||this.y>=500||this.y<=-20){
             scene.removeChild(this);
         }
     },
