@@ -25,6 +25,8 @@ var operation;
 var result1;
 var rr2;
 var stage
+var test
+
 
 window.onload = function(){
     game = new Game(1000,500);
@@ -375,6 +377,6 @@ function Resultset2(){
     label2.x = 490;
     label2.y = 100;
     resultscene.addChild(label);
-    resultscene.addChild(label2);
+    resultscene.addChild(label2);ｓｚ
 }
 
