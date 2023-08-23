@@ -6,6 +6,7 @@ var player;
 var BossEnemy;
 var enemy;
 var enemy2;
+var enemy3;
 var scene;
 var resultscene;
 var bg;
@@ -75,8 +76,14 @@ window.onload = function(){
                     scene.addChild(enemy2);
                     boss+=10
                     }
-                    
                 }
+                if(game.frame % 500 ==0){
+                    enemy3 = new BossEnemy({
+                        x:400+Math.random()*200,y: 50 + Math.random() * 10 , speed: 6 +Math.floor(Math.random()*8),enemy_type:0,move_type:0
+                    })
+                    scene.addChild(enemy3)
+                   } 
+                
             }
                 checkIntersect();
                 /*player.addEventListener(Event.TOUCH_START,function(){
@@ -119,6 +126,7 @@ function doPreload(){
         "image/enemy/bullet10.png",
         "image/enemy/tama1.png",
         "image/enemy/marutama.png",
+        "image/enemy/BigEnemy4.png",
         "image/others/BB.jpg",
         "image/others/settei1.png",
         "image/others/space2.jpg",
@@ -219,6 +227,12 @@ function checkIntersect(){
         scene.removeChild(pair[1]);
         scorecolmn = 1;
     });
+
+    BossEnemy.intersect(Weapon).forEach(function(pair){
+        pair[0].damage(pair[1].power);
+        scene.removeChild(pair[1]);
+        scorecolmn = 1 ;
+    })
 }
 
 function calculateAngle(x1, y1, x2, y2) {
@@ -341,6 +355,11 @@ function setOperation(){
     operation.addChild(label2);
     label2.mx = 8;
     label2.my = 80;
+    var label3 = new Label("敵を倒して高スコアを目指そう！")
+    label3.font = "16px Courier New";
+    operation.addChild(label3);
+    label3.mx = 8;
+    label3.my = 120;
 }
 
 //リザルト画面設定

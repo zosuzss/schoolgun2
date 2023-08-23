@@ -69,6 +69,7 @@ var Enemy  = Class.create(Sprite,{
         }else if(this.move_type==1){
             this.x = 690;
             this.hp = 9;
+            this.ang = 80+Math.random()+40;
         }else if(this.move_type==2){
             this.x = 400+160;
             this.y = -10;
@@ -95,14 +96,14 @@ var Enemy  = Class.create(Sprite,{
         this.tl.rotateTo(this.angle-70, 0);
         this.angle -=1;
         }else if(this.move_type==1){
-            this.x -= this.speed
-            this.y += this.speed
+            this.x += Math.cos(this.ang * (Math.PI / 180)) * this.speed;
+            this.y += Math.sin(this.ang * (Math.PI / 180)) * this.speed;
         }else if(this.move_type==2){
-            var ang = this.test;
+            var angl = this.test;
             var i = 0;
-            this.x += Math.cos(ang * (Math.PI / 180)) * this.speed;
-            this.y += Math.sin(ang * (Math.PI / 180)) * this.speed;
-            this.tl.rotateTo(ang-90, 0);
+            this.x += Math.cos(this.test * (Math.PI / 180)) * this.speed;
+            this.y += Math.sin(this.test * (Math.PI / 180)) * this.speed;
+            this.tl.rotateTo(this.test-90, 0);
         }else  if (this.move_type == 3) {
             this.x += Math.cos(this.angle * (Math.PI / 180)) * this.speed;
             this.y += Math.sin(this.angle * (Math.PI / 180)) * this.speed;

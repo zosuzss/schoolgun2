@@ -1,9 +1,9 @@
 var Explosion = Class.create(Sprite,{
     initialize: function(X,Y){
-        Sprite.call(this,32,32);
+        Sprite.call(this,96,96);
         this.image = game.assets["image/player/ex.png"]
-        this.x = X;
-        this.y = Y;
+        this.x = X-28;
+        this.y = Y-28;
     },
     onenterframe: function(){
         if (game.frame % 10 == 0) {

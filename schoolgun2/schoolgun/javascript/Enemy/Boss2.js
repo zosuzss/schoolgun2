@@ -23,23 +23,17 @@ var BossEnemy  = Class.create(Sprite,{
         //追加設定
         this.initial_frame = game.frame;
 
+        this.movetype = 0;
+        this.attackfome = 0;
+
         this.is_destroy = 0;
-        if(this.move_type==2){
+        if(this.move_type==0){
             this.hp = 30;
-        }else{
-        this.hp = 30;
         }
-        this.test = calculateAngle(this.x + this.width / 2, this.y + this.height / 2, player.x + (player.qqwidth / 2), player.y + (player.height / 2));
+        this.test = calculateAngle(this.x + this.width / 2, this.y + this.height / 2, player.x + (player.width / 2), player.y + (player.height / 2));
     },
     onenterframe: function(){
-        if (game.frame % 10 == 0) {
-            if (this.frame == 1) {
-                this.frame = 0;
-            } else {
-                this.frame = 1;
-            }
-        }
-        this.move();
+        this.move(this.movetype);
         this.attack();
         if(this.x<=390||this.x>=691||this.y>=460||this.y<=-20){
             scene.removeChild(this);
@@ -47,15 +41,16 @@ var BossEnemy  = Class.create(Sprite,{
     },
     //タイプ事に入れ替え
     setStatusFromEnemyType: function () {
-        if (this.enemy_type == 1) {
-            this.image = game.assets["image/enemy/BigenemyO.png"];
-            this.hp = 30;
+        if (this.enemy_type == 0) {
+            this.image = game.assets["image/enemy/BigEnemy4.png"];
         }
     },
     setSpriteScaleFromEnemyType: function (param) {
-        if (this.enemy_type == 1) {
-            Sprite.call(this, 32, 32);
+        if (this.enemy_type == 0) {
+            Sprite.call(this, 44, 44);
             this.attack_cooltime = 0;
+            this.x = param["x"];
+            this.y = param["y"];
         }
         this.x = param["x"];
         this.y = param["y"];
@@ -63,16 +58,7 @@ var BossEnemy  = Class.create(Sprite,{
     //タイプごとに配置場所変更
     setPositionFromMoveTypeIsLeft: function(){
         if(this.move_type==0){
-            this.x = 500;
-            this.y = -10;
-            this.hp = 30;
-        }else if(this.move_type==1){
-            this.x = 690;
-            this.hp = 30;
-        }else if(this.move_type==2){
-            this.x = 400+160;
-            this.y = -10;
-            this.hp = 30;
+            this.hp =30;
         }
     },
     //初期化用
@@ -80,44 +66,43 @@ var BossEnemy  = Class.create(Sprite,{
         this.speed = param["speed"];
         this.enemy_type = param["enemy_type"]; 
         this.move_type = param["move_type"];
-        this.angle =  90;
+        this.angle = 90;
+        this.y = -30;
+        this.rotate_x = 1;
     },
+    
     //エネミーの動きの種類
-    move: function(){
-        if(this.move_type==0){
-        this.x += Math.cos(this.angle * (Math.PI / 180)) * this.speed;
-        this.y += Math.sin(this.angle * (Math.PI / 180)) * this.speed;
-        this.tl.rotateTo(this.angle-70, 0);
-        this.angle -=1;
-        }else if(this.move_type==1){
-            this.x -= this.speed
-            this.y += this.speed
-        }else if(this.move_type==2){
-            var ang = this.test;
-            var i = 0;
-            this.x += Math.cos(ang * (Math.PI / 180)) * this.speed;
-            this.y += Math.sin(ang * (Math.PI / 180)) * this.speed;
-            this.tl.rotateTo(ang-90, 0);
-        };
+    move: function(a){
+        if(this.enemy_type==0){
+            if (game.frame - this.initial_frame <= (180 / this.speed)) {
+                this.x += Math.cos(this.angle * (Math.PI / 180)) * this.speed;
+                this.y += Math.sin(this.angle * (Math.PI / 180)) * this.speed;
+            } else if (game.frame - this.initial_frame >= (3000 / this.speed)) {
+                this.angle = 180 + 1 * 180;
+                this.x += Math.cos(this.angle * (Math.PI / 180)) * this.speed;
+                this.y += Math.sin(this.angle * (Math.PI / 180)) * this.speed;
+            } else {
+                this.angle += 1;
+            }
+        }
+
+        
     },
     //エネミーのダメージ計算
     damage: function(weapon_damage){
         this.hp -= weapon_damage;
         if(this.hp<=0){
         scene.removeChild(this);
-        score2 += 100;
+        score2 += 500;
         }
     },
     //攻撃の種類
     attack: function(){
         if(this.attack_cooltime <= 0){
             var to_player = calculateAngle(this.x + this.width / 2, this.y + this.height / 2, player.x + (player.width / 2), player.y + (player.height / 2));
-            if(this.move_type == 0){
-                this.attack2way(to_player,30,1);
-            }else if(this.move_type==1){
+            if(this.attackfome==0){
                 this.attackCircle(16);
-            }else if(this.move_type==2){
-                this.attack1(to_player,0);
+                this.attackfome = 0;
             }
             this.attack_cooltime = 40;
         }
