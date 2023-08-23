@@ -355,6 +355,11 @@ function setOperation(){
     operation.addChild(label2);
     label2.mx = 8;
     label2.my = 80;
+    var label3 = new Label("敵を倒して高スコアを目指そう！")
+    label3.font = "16px Courier New";
+    operation.addChild(label3);
+    label3.mx = 8;
+    label3.my = 120;
 }
 
 //リザルト画面設定
