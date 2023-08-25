@@ -3,10 +3,11 @@ var Player = Class.create(Sprite,{
     initialize: function(){
         Sprite.call(this,32,32);
         this.image = game.assets["image/player/kitai1.png"];
-        this.x = 550;
+        this.x = 540;
         this.y = 450;
         this.hp = 150;
         this.weapon_cooltime = 0;
+        
     },
     onenterframe: function(){
         //プレイヤーの画像の動き
@@ -27,7 +28,18 @@ var Player = Class.create(Sprite,{
                 scene.addChild(weapon);
                 this.weapon_cooltime = 5;
         }
-    }
+        }
+
+        if(game.input.b){
+            if(this.weapon_cooltime <= 0){
+                var weapon = new Weapon(this.x + 6 + Math.random() * 8, this.y - 30+ Math.random()*8, 260, "star", 3);
+                scene.addChild(weapon);
+                var weapon2 = new Weapon(this.x + 6 + Math.random() * 8, this.y - 30+ Math.random()*8, 280, "star", 3);
+                scene.addChild(weapon2);
+                this.weapon_cooltime = 5;
+            }
+        }
+
         if (this.weapon_cooltime > 0) {
             this.weapon_cooltime -= 1;
         }

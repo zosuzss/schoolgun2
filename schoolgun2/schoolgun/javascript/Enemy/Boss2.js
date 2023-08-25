@@ -104,7 +104,7 @@ var BossEnemy  = Class.create(Sprite,{
                 this.attackCircle(16);
                 this.attackfome = 0;
             }
-            this.attack_cooltime = 40;
+            this.attack_cooltime = 30;
         }
         this.attack_cooltime -=1;
     },

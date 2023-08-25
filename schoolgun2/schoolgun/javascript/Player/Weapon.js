@@ -17,7 +17,7 @@ var Weapon = Class.create(Sprite, {
             this.y += Math.sin(this.angle * (Math.PI / 180)) * 20;
             this.frame = (this.frame + 1) % 3;
         }
-        if (this.x <= -30 || this.x >= 720 || this.y <= -30 || this.y >= 990) {
+        if (this.x <= 390 || this.x >= 700 || this.y <= -30 || this.y >= 990) {
             scene.removeChild(this);
         }
     }

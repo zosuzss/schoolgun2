@@ -25,7 +25,7 @@ var Enemy  = Class.create(Sprite,{
 
         this.is_destroy = 0;
         if(this.move_type==2){
-            this.hp = 30;
+            this.hp = 9;
         }else{
         this.hp = 9;
         }
@@ -73,7 +73,7 @@ var Enemy  = Class.create(Sprite,{
         }else if(this.move_type==2){
             this.x = 400+160;
             this.y = -10;
-            this.hp = 30;
+            this.hp = 9;
         }else if(this.move_type==3){
             this.x = 400;
             this.y = -10;

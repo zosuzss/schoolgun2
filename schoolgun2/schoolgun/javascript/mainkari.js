@@ -12,6 +12,8 @@ var resultscene;
 var bg;
 var score;
 var score2;
+var boss;
+var bosscool;
 var scorecolmn;
 var revaival;
 var start;
@@ -28,6 +30,7 @@ var rr2;
 var stage;
 var test;
 var explosion;
+var aud
 
 
 window.onload = function(){
@@ -35,6 +38,7 @@ window.onload = function(){
     doPreload();
     game.fps = 40;
     game.keybind(90,"a");//z
+    game.keybind(88,"b");//x
     game.keybind(16, "shift");
     
     game.onload = function(){
@@ -52,6 +56,7 @@ window.onload = function(){
         hpvar = new HPBar();
         explanation();
         setUI();
+        var music = new Audio('image/bullet.mp3');
        
         start.addEventListener(Event.TOUCH_START,function(){
             scene.removeChild(start);
@@ -60,22 +65,39 @@ window.onload = function(){
             score = Scene(score2)
             scene.addChild(score);
             scene.addChild(hpvar);
-            var boss = 0
+            boss = 0
+            bosscool = 0;
             //1フレームごとに動かす
             scene.onenterframe = function(){
                 scene.insertBefore(board, null);
                 label_score._score = score2;
                 localStorage.setItem('kas',score2);//スコアを記録
                 if(gameover1==0){
+
+                    if(game.input.a){
+                        aud = 1;
+                    }
+
+                    if(aud==1){
+                        music.play();
+                    }
+
                 if (game.frame % 60 == 0) {
                 
-                    enemy = new Enemy({x:380,y:50,speed:3,enemy_type:1,move_type:Math.floor(Math.random() * 3)});
-                    scene.addChild(enemy);
-                    if(score2 >= 300&&boss==0){
-                    enemy2 = new BossEnemy2({x:380,y:50,speed:3,enemy_type:1,move_type:0});
-                    scene.addChild(enemy2);
-                    boss+=10
-                    }
+                        enemy = new Enemy({x:380,y:50,speed:3,enemy_type:1,move_type:Math.floor(Math.random() * 3)});
+                        scene.addChild(enemy);
+                        if(score2 >= 3000&&boss==0&&bosscool==1){
+                        enemy2 = new BossEnemy2({x:380,y:50,speed:3,enemy_type:1,move_type:0,hitpoint:300});
+                        scene.addChild(enemy2);
+                        boss+=10
+                        bosscool=1;
+                        }
+                    
+                        if(score2 >= 10000&&boss>=30&&bosscool==0){
+                            enemy2 = new BossEnemy2({x:380,y:50,speed:3,enemy_type:1,move_type:0,hitpoint:600});
+                            scene.addChild(enemy2);
+                            bosscool = 1;
+                            }
                 }
                 if(game.frame % 500 ==0){
                     enemy3 = new BossEnemy({
@@ -139,6 +161,7 @@ function doPreload(){
         "image/player/kitai1.png",
         "image/player/bullet.png",
         "image/player/ex.png",
+        
     );
 };
 //スコア（用済み）
@@ -350,16 +373,21 @@ function setOperation(){
     operation.addChild(label2);
     label2.mx = 10;
     label2.my = 60;
-    var label2 = new Label("Zキー:ショット")
+    var label2 = new Label("Zキー:1ショット")
     label2.font = "16px Courier New";
     operation.addChild(label2);
     label2.mx = 8;
     label2.my = 80;
+    var label4 = new Label("Xキー:2ショット")
+    label4.font = "16px Courier New";
+    operation.addChild(label4);
+    label4.mx = 8;
+    label4.my = 100;
     var label3 = new Label("敵を倒して高スコアを目指そう！")
     label3.font = "16px Courier New";
     operation.addChild(label3);
     label3.mx = 8;
-    label3.my = 120;
+    label3.my = 140;
 }
 
 //リザルト画面設定

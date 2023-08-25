@@ -5,6 +5,7 @@
  * @param   param["speed"]
  * @param   param["enemy_type"]
  * @param   param["move_type"]
+ * @param   param["hitpoint"]
  */
 
 var BossEnemy2  = Class.create(Sprite,{
@@ -27,9 +28,7 @@ var BossEnemy2  = Class.create(Sprite,{
         this.attackfome = 0;
 
         this.is_destroy = 0;
-        if(this.move_type==0){
-            this.hp = 300;
-        }
+        
         this.test = calculateAngle(this.x + this.width / 2, this.y + this.height / 2, player.x + (player.width / 2), player.y + (player.height / 2));
     },
     onenterframe: function(){
@@ -43,7 +42,7 @@ var BossEnemy2  = Class.create(Sprite,{
     setStatusFromEnemyType: function () {
         if (this.enemy_type == 1) {
             this.image = game.assets["image/enemy/BigEnemy2.png"];
-            this.hp = 1;
+            
         }
     },
     setSpriteScaleFromEnemyType: function (param) {
@@ -59,7 +58,6 @@ var BossEnemy2  = Class.create(Sprite,{
         if(this.move_type==0){
             this.x = 397;
             this.y = -10;
-            this.hp =300;
         }
     },
     //初期化用
@@ -67,6 +65,7 @@ var BossEnemy2  = Class.create(Sprite,{
         this.speed = param["speed"];
         this.enemy_type = param["enemy_type"]; 
         this.move_type = param["move_type"];
+        this.hp = param["hitpoint"]
         this.angle =  85;
     },
     //エネミーの動きの種類
@@ -98,7 +97,9 @@ var BossEnemy2  = Class.create(Sprite,{
         this.hp -= weapon_damage;
         if(this.hp<=0){
         scene.removeChild(this);
-        score2 += 100;
+        score2 += 5000;
+        boss += 20;
+        bosscool  = 0;
         }
     },
     //攻撃の種類
