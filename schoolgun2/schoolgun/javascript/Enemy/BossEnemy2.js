@@ -99,7 +99,7 @@ var BossEnemy2  = Class.create(Sprite,{
         scene.removeChild(this);
         score2 += 5000;
         boss += 20;
-        bosscool  = 0;
+        bosscool  = 2;
         }
     },
     //攻撃の種類

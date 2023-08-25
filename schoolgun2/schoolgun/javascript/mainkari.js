@@ -56,7 +56,7 @@ window.onload = function(){
         hpvar = new HPBar();
         explanation();
         setUI();
-        var music = new Audio('image/bullet.mp3');
+        var music = new Audio('image/se_gun_fire2.mp3');
        
         start.addEventListener(Event.TOUCH_START,function(){
             scene.removeChild(start);
@@ -86,14 +86,14 @@ window.onload = function(){
                 
                         enemy = new Enemy({x:380,y:50,speed:3,enemy_type:1,move_type:Math.floor(Math.random() * 3)});
                         scene.addChild(enemy);
-                        if(score2 >= 3000&&boss==0&&bosscool==1){
+                        if(score2 >= 3000&&boss==0&&bosscool==0){
                         enemy2 = new BossEnemy2({x:380,y:50,speed:3,enemy_type:1,move_type:0,hitpoint:300});
                         scene.addChild(enemy2);
                         boss+=10
                         bosscool=1;
                         }
                     
-                        if(score2 >= 10000&&boss>=30&&bosscool==0){
+                        if(score2 >= 10000&&boss>=30&&bosscool==2){
                             enemy2 = new BossEnemy2({x:380,y:50,speed:3,enemy_type:1,move_type:0,hitpoint:600});
                             scene.addChild(enemy2);
                             bosscool = 1;
@@ -161,7 +161,6 @@ function doPreload(){
         "image/player/kitai1.png",
         "image/player/bullet.png",
         "image/player/ex.png",
-        
     );
 };
 //スコア（用済み）
