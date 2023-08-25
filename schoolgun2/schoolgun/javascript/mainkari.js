@@ -3,6 +3,7 @@ enchant();
 //グローバル関数
 var game;
 var player;
+var music2;
 var BossEnemy;
 var enemy;
 var enemy2;
@@ -56,8 +57,8 @@ window.onload = function(){
         hpvar = new HPBar();
         explanation();
         setUI();
-        var music = new Audio('image/se_gun_fire2.mp3');
-       
+        var music = new Audio('image/sub.mp3');
+        var music2 = new Audio("image/jiyunoparadox.mp3")
         start.addEventListener(Event.TOUCH_START,function(){
             scene.removeChild(start);
             scene.addChild(player);
@@ -72,15 +73,16 @@ window.onload = function(){
                 scene.insertBefore(board, null);
                 label_score._score = score2;
                 localStorage.setItem('kas',score2);//スコアを記録
+                if(gameover1!=0){
+                    music2.pause();
+                }
                 if(gameover1==0){
-
-                    if(game.input.a){
-                        aud = 1;
-                    }
-
-                    if(aud==1){
+                    music2.play();
+                    music2.loop = true
+                    if(game.input.a||game.input.b){
                         music.play();
                     }
+
 
                 if (game.frame % 60 == 0) {
                 
@@ -265,6 +267,8 @@ function calculateAngle(x1, y1, x2, y2) {
 function revivePlayer() {
     var aaaa= henkan();
     resultscene.addChild(aaaa)
+    
+    
     /*
     player = new Player();
     scene.addChild(player);

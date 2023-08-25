@@ -42,7 +42,7 @@ var BossEnemy  = Class.create(Sprite,{
     //タイプ事に入れ替え
     setStatusFromEnemyType: function () {
         if (this.enemy_type == 0) {
-            this.image = game.assets["image/enemy/BigEnemy4.png"];
+            this.image = game.assets["image/enemy/BigEnemy3.png"];
         }
     },
     setSpriteScaleFromEnemyType: function (param) {
